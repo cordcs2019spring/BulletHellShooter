@@ -45,7 +45,7 @@ public class MyMini2DxGame extends BasicGame {
         enemySnake = new MovementSerpentine("Ship1.png", 200,500,2,2,20,20);
         enemies.add(enemyShip);
         enemies.add(enemySnake);
-        playerShip = new PlayerShip("playership.png", 300,300,3,3);
+        playerShip = new PlayerShip("playership.png", 300,300,6,6);
         player = playerShip;
 
         screenHeight = getHeight();

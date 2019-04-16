@@ -7,7 +7,7 @@ package com.mystudio.gamename;
 public class Bullet extends MovementBase {
 
     //Controlls the speed with which the bullet travels down
-    public static final int BULLETSPEED = -6;
+    public static final int BULLETSPEED = -15;
 
     /*
         Bullets are really damn simple, so they are just a stripped down version of a MovementBase
