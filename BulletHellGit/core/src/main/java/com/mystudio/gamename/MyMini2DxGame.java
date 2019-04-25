@@ -36,6 +36,7 @@ public class MyMini2DxGame extends BasicGame {
 
     public static int screenWidth;
 	//private Texture texture;
+    public EnemySpawner basicSpawner = new EnemySpawner();
 	
 	@Override
     public void initialise() {
@@ -50,6 +51,8 @@ public class MyMini2DxGame extends BasicGame {
 
         screenHeight = getHeight();
         screenWidth = getWidth();
+        
+        
     }
     
     @Override
@@ -61,6 +64,8 @@ public class MyMini2DxGame extends BasicGame {
 
         player.update();
         //System.out.println(enemies.size());
+        
+        basicSpawner.spawnEnemy();
     }
     
     @Override
