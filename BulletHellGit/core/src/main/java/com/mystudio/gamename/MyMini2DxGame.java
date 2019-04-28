@@ -42,15 +42,12 @@ public class MyMini2DxGame extends BasicGame {
     public void initialise() {
 
 	    //texture = new Texture("mini2Dx.png");
-        enemyShip = new MovementBase("Ship1.png", 100,100,0,2);
-        enemySnake = new MovementSerpentine("Ship1.png", 200,500,2,2,20,20);
-        enemies.add(enemyShip);
-        enemies.add(enemySnake);
-        playerShip = new PlayerShip("playership.png", 300,300,6,6);
-        player = playerShip;
-
         screenHeight = getHeight();
         screenWidth = getWidth();
+        playerShip = new PlayerShip("playership.png", screenWidth/2,screenHeight-250,6,6);
+        player = playerShip;
+
+        
         
         
     }
