@@ -6,7 +6,7 @@ package com.mystudio.gamename;
 public class EnemyBullet extends Bullet {
 
     private static final String ENEMY_BULLET_FILEPATH = "EnemyProjectile.png";
-    private static final int BULLET_SPEED = 6;
+    private static final int BULLET_SPEED = 7;
 
     //An enemy bullet is literally just the basemovement class, but even more simplified
     //Its' renamed for the sake of clarity and easier creation.

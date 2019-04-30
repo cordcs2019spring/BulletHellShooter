@@ -36,14 +36,7 @@ public class PlayerShip extends MovementBase {
     /*
         Similar to super class, but only moves if a key is pressed. Also, doesn't directly check collisions. Bullets check collisions, and enemies check against the player
      */
-    public String update(String currStat) {
-        String stat = currStat;
-
-                        //Pauses game
-        if(Gdx.input.isKeyPressed(Input.Keys.P)){
-            stat = "pause";
-            return stat;
-        }
+    public void update() {
         //Moves to the left
         if (Gdx.input.isKeyPressed(Input.Keys.A)) {
             //GetSprite().setX(GetSprite().getX() - GetXSpeed());
@@ -75,6 +68,7 @@ public class PlayerShip extends MovementBase {
             System.out.println(MyMini2DxGame.screenHeight);
             System.out.println(GetPoint().getY());
         }
+
         //if you hit space, adds another bullet
         if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
             bullets.add(new AllyBullet(GetPoint().getX() + (GetSprite().getWidth() / 2),GetPoint().getY()));
@@ -90,7 +84,6 @@ public class PlayerShip extends MovementBase {
         //removes all of the bullets that have hit and destroyed an enemy. Then clears the array.
         bullets.removeAll(bulletsToDelete);
         bulletsToDelete = new ArrayList<AllyBullet>();
-        return stat;
     }
 
     /*
