@@ -93,9 +93,9 @@ public class MovementBase {
     /*
         Update increments all the game logic loop type stuff.
      */
-    public void update() {
+    public String update(String currStat) {
         //sprite.setPosition(sprite.getX() + xSpeed, sprite.getY() + ySpeed);
-
+        String stat = currStat;
         //This line magically makes the program not crash. Worship it, for it is beyond mortal ken.
         point.preUpdate();
 
@@ -108,9 +108,8 @@ public class MovementBase {
         CheckBounds();
 
         //checks to see if the enemy has collided with the player.
-        CheckCollision();
-
-
+        stat = CheckCollision(stat);
+        return stat;
     }
 
     //This serves as aa bridge between render and update. It smoothes over any of the weirdness of the hardware.
@@ -144,21 +143,20 @@ public class MovementBase {
         if (point.getX() >= MyMini2DxGame.screenWidth + sprite.getWidth() || point.getY() >= MyMini2DxGame.screenHeight + sprite.getHeight()) {
             MyMini2DxGame.enemies.remove(this);
             System.out.println("Removed an enemy!");
-        } else if (point.getX() <= 0 - sprite.getWidth() || point.getY() <= -200 - sprite.getHeight() ) {
-            //the extra -200 gives us an extra buffer zone at the top of the screen.
-            MyMini2DxGame.enemies.remove(this);
-            System.out.println("Removed an enemy!");
         }
     }
 
     /*
         Checks for collisions using the math library.
      */
-    private void CheckCollision(){
+    private String CheckCollision(String currStat){
         //Every enemy when they updates checks to see if they have collided with the player.
+        String stat = currStat;
         if (hitbox.overlaps(MyMini2DxGame.player.GetHitBox())){
             System.out.println("The player has been hit!!!");
+            stat = "GameOver";
         }
+        return stat;
     }
 
 }
