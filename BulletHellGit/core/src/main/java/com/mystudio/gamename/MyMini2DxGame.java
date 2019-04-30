@@ -11,6 +11,7 @@ import org.mini2Dx.core.graphics.Graphics;
 import org.mini2Dx.core.graphics.Sprite;
 
 import java.util.ArrayList;
+import org.mini2Dx.core.engine.geom.CollisionPoint;
 
 
 public class MyMini2DxGame extends BasicGame {
@@ -43,18 +44,19 @@ public class MyMini2DxGame extends BasicGame {
     public PauseScreen pauseScreen;
             
     public GameOverScreen gameOverScreen;
-
+    
     private String status;
 	//private Texture texture;
-    
-    public EnemySpawner basicSpawner = new EnemySpawner();
 	
 	@Override
     public void initialise() {
 
 	    //texture = new Texture("mini2Dx.png");
-       
-        playerShip = new PlayerShip("playership.png", screenWidth+1000,screenHeight+700,6,6);
+        enemyShip = new MovementBase("Ship1.png", 100,100,0,2);
+        enemySnake = new MovementSerpentine("Ship1.png", 200,500,2,2,20,20);
+        enemies.add(enemyShip);
+        enemies.add(enemySnake);
+        playerShip = new PlayerShip("playership.png", 300,300,6,6);
         player = playerShip;
 
         screenHeight = getHeight();
@@ -74,16 +76,24 @@ public class MyMini2DxGame extends BasicGame {
         if(!status.equals("pause")){
             status = startScreen.update(status);
             status = gameOverScreen.update(status);
-
+            
             for (int i = 0; i < enemies.size();i++) {
             status = enemies.get(i).update(status);
             }         
             status = player.update(status);
             //System.out.println(enemies.size());
         }
-        basicSpawner.spawnEnemy();
             status = pauseScreen.update(status);
         
+        if(status.equals("GameOver")){    
+            for (int i = 0; i < enemies.size();i++){
+                enemyShip.SetPoint(new CollisionPoint(100,100));
+                enemySnake.SetPoint(new CollisionPoint(200,500));
+                enemies.get(i).update(status);
+            }
+            playerShip.SetPoint(new CollisionPoint(300,300));
+        }
+
         
     }
     
@@ -124,16 +134,6 @@ public class MyMini2DxGame extends BasicGame {
         //enemies.get(0).render(g);
         //playerShip.render(g);
     }
-    public void Pause(){
-        if(Gdx.input.isKeyJustPressed(Input.Keys.P)){
-            pauseScreen.update("pause");
-        }
-    }
-    
-    public void Resume(){
-        if(Gdx.input.isKeyJustPressed(Input.Keys.R)){
-            pauseScreen.update("play");
-        }
-    }
+
             
 }

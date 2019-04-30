@@ -1,5 +1,4 @@
 package com.mystudio.gamename;
-import java.util.Random;
 /*
     This class enables serpentine movement. This can be used for moving back an forth on an angle. Moving back and worth while moving down, or moving up and down while going right
     or any other similar combination;
@@ -15,8 +14,6 @@ public class MovementSerpentine extends MovementBase {
     private int maxStepsUpDown;
     private int currentStepsUpDown;
 
-       //How likely the ship is to shoot at any given time
-    private int shotChance;
     /*
         @param String texturepath, the string which leads you to the sprite,
         @float x, x coordinate
@@ -26,12 +23,11 @@ public class MovementSerpentine extends MovementBase {
         @int maxStepsToSide, the number of frames the enemy moves to the side before revering
         @int maxStepsUpDown, the number of frames the enemy moves up or down before reversing.
      */
-     public MovementSerpentine(String texturePath, float x, float y, int xSpeed, int ySpeed, int maxStepsToSide, int maxStepsUpDown, int shotChance) {
+    public MovementSerpentine(String texturePath, float x, float y, int xSpeed, int ySpeed, int maxStepsToSide, int maxStepsUpDown) {
         super(texturePath,x,y,xSpeed,ySpeed);
 
         this.maxStepsToSide = maxStepsToSide;
         this.maxStepsUpDown = maxStepsUpDown;
-        this.shotChance = shotChance;
     }
 
     public String update(String currStat){
@@ -57,14 +53,6 @@ public class MovementSerpentine extends MovementBase {
             currentStepsUpDown = 0;
         } else if (maxStepsUpDown != -1) {
             currentStepsUpDown++;
-        }
-        //BULLET SPAWNER
-        Random roller = new Random();
-        int temp = roller.nextInt(100);
-
-       //uses shotChance variable to determine how often the ship will shoot. Rolled once every update. 
-        if (temp<=shotChance){
-        MyMini2DxGame.enemies.add(new EnemyBullet(super.GetPoint().getX(),super.GetPoint().getY()));
         }
 
 

@@ -20,8 +20,10 @@ public class GameOverScreen // implements ApplicationListener
     //PROPERTIES, GETTERS SETTERS
 
     //This is the graphical asset that the user sees
+    
+    public MyMini2DxGame myMini2DXGame;
+    
     private Sprite sprite;
-
 
     public Sprite GetSprite() {
         return sprite;
@@ -52,14 +54,14 @@ public class GameOverScreen // implements ApplicationListener
     public String update(String currStat) {
 
         String stat = currStat;
-//        System.out.println("hi");
-        //Moves to the left
+
         if (stat.equals("GameOver")) {
             stat = "GameOver";
             if(Gdx.input.isKeyPressed(Input.Keys.X)){
                 
-                stat = "START";
-            
+                stat="START";
+
+                
             }
         }
         
