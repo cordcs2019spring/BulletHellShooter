@@ -19,9 +19,9 @@ public class EnemySpawner {
             int temp = roller.nextInt(100);
             int temp2 = roller.nextInt(3);
         //rollers for enemy spawn locations; based around screen height and width
-            int randx = roller.nextInt(MyMini2DxGame.screenWidth);
+            float randx = roller.nextInt(MyMini2DxGame.screenWidth);
             randx = randx-100;
-            int randy = roller.nextInt(300);
+            float randy = roller.nextInt(300);
             randy = randy*-1;
         
             if (timer>=100){
