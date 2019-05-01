@@ -130,7 +130,7 @@ public class MovementBase {
         g.drawSprite(sprite,point.getRenderX(),point.getRenderY());
 
         //this draws the hitbox for the sake of debugging. Not needed in the final product.
-        g.drawRect(hitbox.getX(),hitbox.getY(),hitbox.getWidth(),hitbox.getHeight());
+        //g.drawRect(hitbox.getX(),hitbox.getY(),hitbox.getWidth(),hitbox.getHeight());
         //Rectangle temp = sprite.getBoundingRectangle();
         //g.drawRect(temp.getX(),temp.getY(),temp.getWidth(),temp.getHeight());
     }

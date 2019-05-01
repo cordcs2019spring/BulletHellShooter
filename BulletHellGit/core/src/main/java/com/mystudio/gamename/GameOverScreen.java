@@ -21,6 +21,9 @@ public class GameOverScreen // implements ApplicationListener
     //PROPERTIES, GETTERS SETTERS
 
     //This is the graphical asset that the user sees
+    private boolean hasStored = false;
+    private String[] scores;
+    private boolean hasSortedScores = false;
     
     public MyMini2DxGame myMini2DXGame;
     
@@ -58,7 +61,18 @@ public class GameOverScreen // implements ApplicationListener
 
         if (stat.equals("GameOver")) {
             stat = "GameOver";
+            if(!hasStored){
+                StorageHandler.Load();
+                StorageHandler.AppendScore("", MyMini2DxGame.score);
+                System.out.println(StorageHandler.GetPlayerData().RetrieveScores()[0].GetPlayerScore());
+                System.out.println(StorageHandler.GiveScoresSortedByHighest()[0].GetPlayerScore());
+                hasStored = true;
+            }
             if(Gdx.input.isKeyPressed(Input.Keys.X)){
+                StorageHandler.Store();
+                hasStored = false;
+                hasSortedScores = false;
+                MyMini2DxGame.score = 0;
                 
                 stat="START";
             }    
@@ -88,11 +102,32 @@ public class GameOverScreen // implements ApplicationListener
         //sprite.setPosition(point.getRenderX(),point.getRenderY());
         //g.drawTexture(sprite.getTexture(),point.getRenderX(),point.getRenderY());
         
-        Collections.sort(MyMini2DxGame.scores, Collections.reverseOrder());
+        //Collections.sort(MyMini2DxGame.scores, Collections.reverseOrder());
         g.drawSprite(sprite,800,400);
         g.drawString("Game Over! Your Score is: " + MyMini2DxGame.score,200,200);
-        g.drawString("These are the high scores" + MyMini2DxGame.scores,200,225);
+        if(!hasSortedScores) {
+            PlayerScore[] temp = StorageHandler.GiveScoresSortedByHighest();
+            scores = new String[temp.length];
+            for(int i = 0; i < temp.length;i++){
+                scores[i] = Integer.toString(temp[i].GetPlayerScore());
+                System.out.println("Scores: " + scores[i]);
+                //System.out.println("Player Score: " + temp[i].GetPlayerScore());
+                hasSortedScores = true;
+            }
+            
+        }
         
+        /*try{
+            g.drawString("These are the high scores " + scores,200,225);
+        } catch (ArrayIndexOutOfBoundsException e) {
+            System.out.println("You've gone too far!");
+        }*/
+        
+        
+        g.drawString("Here are the previous high scores: ", 200, 225);
+        for(int i = 0; i < scores.length;i++){
+            g.drawString(scores[i], 450, 225 + 20*i);
+        }
 
     }
     

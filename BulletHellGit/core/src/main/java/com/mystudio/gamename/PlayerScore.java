@@ -45,4 +45,8 @@ public class PlayerScore implements Cloneable {
     public PlayerScore clone() {
         return new PlayerScore(this);
     }
+    
+    public String toString(){
+        return name + score;
+    }
 }

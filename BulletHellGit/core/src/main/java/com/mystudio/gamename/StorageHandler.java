@@ -37,21 +37,25 @@ public class StorageHandler {
     */
     public static boolean Load(){
         try {
-            String temp = FILE.readString();
-            String[] rows = temp.split("\n");
-            for(String str: rows){
-                String[] columns = str.split(",");
-                int score = 0;
-                try {
-                    score = Integer.parseInt(columns[1]);
-                } catch (NumberFormatException e) {
-                    score = -1;
-                }
+            try{
+                String temp = FILE.readString();
+                String[] rows = temp.split("\n");
+                for(String str: rows){
+                    String[] columns = str.split(",");
+                    int score = 0;
+                    try {
+                        score = Integer.parseInt(columns[1]);
+                    } catch (NumberFormatException e) {
+                        score = -1;
+                    }
                 
-                AppendScore(columns[0],score);
-            }
+                    AppendScore(columns[0],score);
+                } 
             
-            return true;
+                return true;
+            } catch(ArrayIndexOutOfBoundsException e) {
+                return false;
+            }
         } catch (GdxRuntimeException e) {
             return false;
         }
@@ -84,6 +88,9 @@ public class StorageHandler {
         }
         
       //System.out.println(FILE.readString());
+        
+        //clears out player data.
+        playerData = new PlayerData();
         
         return true;
     }
