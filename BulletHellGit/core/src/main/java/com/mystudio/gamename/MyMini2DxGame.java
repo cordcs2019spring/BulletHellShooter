@@ -45,6 +45,9 @@ public class MyMini2DxGame extends BasicGame {
             
     public GameOverScreen gameOverScreen;
     
+    //the game score
+    public static int score;
+    
     private String status;
 	//private Texture texture;
     public EnemySpawner basicSpawner;
@@ -56,6 +59,8 @@ public class MyMini2DxGame extends BasicGame {
        
         playerShip = new PlayerShip("playership.png", screenWidth+1000,screenHeight+700,6,6);
         player = playerShip;
+        
+        score = 0;
 
         basicSpawner = new EnemySpawner(0);
         
@@ -122,6 +127,8 @@ public class MyMini2DxGame extends BasicGame {
             else if (status.equals("GameOver")){
             
                 gameOverScreen.render(g);
+               //adds timer to score
+               score= basicSpawner.timer + score;
             }
                 
             else

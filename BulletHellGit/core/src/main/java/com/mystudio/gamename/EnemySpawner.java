@@ -8,7 +8,7 @@ public class EnemySpawner {
     //initializes the boundaries of the screen and creates a timer variable
     int yboundary;
     int xboundary;
-    private int timer;
+    public int timer;
     
     public int GetTimer(){
         return timer;
