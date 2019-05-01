@@ -83,8 +83,8 @@ public class PauseScreen // implements ApplicationListener
     public void render(Graphics g) {
         //sprite.setPosition(point.getRenderX(),point.getRenderY());
         //g.drawTexture(sprite.getTexture(),point.getRenderX(),point.getRenderY());
-        g.drawSprite(sprite,900,500);
-        g.drawString("Press R to Resume",32,32);
+        g.drawSprite(sprite,800,400);
+        g.drawString("Press R to Resume",200,200);
 
     }
     

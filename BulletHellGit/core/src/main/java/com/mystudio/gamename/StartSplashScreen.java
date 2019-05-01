@@ -83,8 +83,13 @@ public class StartSplashScreen // implements ApplicationListener
     public void render(Graphics g) {
         //sprite.setPosition(point.getRenderX(),point.getRenderY());
         //g.drawTexture(sprite.getTexture(),point.getRenderX(),point.getRenderY());
-        g.drawSprite(sprite,900,500);
-        g.drawString("",32,32);
+        g.drawSprite(sprite,800,400);
+        g.drawString("Use W to move up",200,200);
+        g.drawString("Use A to move left",200,225);
+        g.drawString("Use S to move Down",200,250);
+        g.drawString("Use D to move right",200,275);
+        g.drawString("Press SPACE to Shoot",200,300);
+        g.drawString("Press P to Pause",200,325);
     }
 
 }

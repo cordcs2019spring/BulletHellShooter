@@ -22,6 +22,12 @@ public class MyMini2DxGame extends BasicGame {
     //the two current experimental enemies
     public MovementBase enemyShip;
     public MovementSerpentine enemySnake;
+    
+    public static ArrayList<Integer> scores;
+    
+    boolean scoreAdded;
+    
+    //public StorageHandler storageHandler;
 
     //the current eperimental instance of the player
     public PlayerShip playerShip;
@@ -61,11 +67,17 @@ public class MyMini2DxGame extends BasicGame {
         player = playerShip;
         
         score = 0;
+        
+        scores = new ArrayList<Integer>();
+        
+        scoreAdded = false;
 
         basicSpawner = new EnemySpawner(0);
         
         screenHeight = getHeight();
         screenWidth = getWidth();
+        
+        //storageHandler = new StorageHandler();
         
         startScreen = new StartSplashScreen("BetterStartScreen.png", 100,100,0,2);        
         status = "START";
@@ -86,9 +98,9 @@ public class MyMini2DxGame extends BasicGame {
             status = enemies.get(i).update(status);
             }         
             status = player.update(status);
+            basicSpawner.spawnEnemy();
             //System.out.println(enemies.size());
         }
-        basicSpawner.spawnEnemy();
         status = pauseScreen.update(status);
         
         if(status.equals("GameOver")){    
@@ -96,8 +108,11 @@ public class MyMini2DxGame extends BasicGame {
             status = enemies.get(i).update(status);
             }*/
             basicSpawner.SetTimer(0);
-            playerShip.SetPoint(new CollisionPoint(screenWidth/2,screenHeight/2));
-            
+            playerShip.SetPoint(new CollisionPoint(screenWidth/2,screenHeight/2));    
+        }
+        
+        if(status.equals("START")){
+            basicSpawner.SetTimer(0);
         }
 
         
@@ -120,6 +135,7 @@ public class MyMini2DxGame extends BasicGame {
         
             if (status.equals("START")) {
                 startScreen.render(g);
+                scoreAdded = false;
             } else if (status.equals("pause")){
                 
                 pauseScreen.render(g);
@@ -128,7 +144,13 @@ public class MyMini2DxGame extends BasicGame {
             
                 gameOverScreen.render(g);
                //adds timer to score
-               score= basicSpawner.timer + score;
+               
+               if(!scoreAdded){
+                   score = basicSpawner.timer + score;
+                   //storageHandler.AppendScore("John Doe",score);
+                   scoreAdded = true;
+                   scores.add(score);
+                }
             }
                 
             else

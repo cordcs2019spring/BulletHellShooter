@@ -6,6 +6,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Rectangle;
+import java.util.Collections;
 import org.mini2Dx.core.engine.geom.CollisionBox;
 import org.mini2Dx.core.engine.geom.CollisionPoint;
 import org.mini2Dx.core.graphics.Graphics;
@@ -86,8 +87,12 @@ public class GameOverScreen // implements ApplicationListener
     public void render(Graphics g) {
         //sprite.setPosition(point.getRenderX(),point.getRenderY());
         //g.drawTexture(sprite.getTexture(),point.getRenderX(),point.getRenderY());
-        g.drawSprite(sprite,900,500);
-        g.drawString("Game Over",32,32);
+        
+        Collections.sort(MyMini2DxGame.scores, Collections.reverseOrder());
+        g.drawSprite(sprite,800,400);
+        g.drawString("Game Over! Your Score is: " + MyMini2DxGame.score,200,200);
+        g.drawString("These are the high scores" + MyMini2DxGame.scores,200,225);
+        
 
     }
     
