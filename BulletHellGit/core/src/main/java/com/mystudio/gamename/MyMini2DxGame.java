@@ -47,16 +47,18 @@ public class MyMini2DxGame extends BasicGame {
     
     private String status;
 	//private Texture texture;
-    public EnemySpawner basicSpawner = new EnemySpawner();
+    public EnemySpawner basicSpawner;
 	
 	@Override
     public void initialise() {
 
 	    //texture = new Texture("mini2Dx.png");
        
-         playerShip = new PlayerShip("playership.png", screenWidth+1000,screenHeight+700,6,6);
+        playerShip = new PlayerShip("playership.png", screenWidth+1000,screenHeight+700,6,6);
         player = playerShip;
 
+        basicSpawner = new EnemySpawner(0);
+        
         screenHeight = getHeight();
         screenWidth = getWidth();
         
@@ -82,15 +84,15 @@ public class MyMini2DxGame extends BasicGame {
             //System.out.println(enemies.size());
         }
         basicSpawner.spawnEnemy();
-            status = pauseScreen.update(status);
+        status = pauseScreen.update(status);
         
         if(status.equals("GameOver")){    
-            for (int i = 0; i < enemies.size();i++){
-                enemyShip.SetPoint(new CollisionPoint(100,100));
-                enemySnake.SetPoint(new CollisionPoint(200,500));
-                enemies.get(i).update(status);
-            }
-            playerShip.SetPoint(new CollisionPoint(300,300));
+            /*for (int i = 0; i < enemies.size();i++){
+            status = enemies.get(i).update(status);
+            }*/
+            basicSpawner.SetTimer(0);
+            playerShip.SetPoint(new CollisionPoint(screenWidth/2,screenHeight/2));
+            
         }
 
         

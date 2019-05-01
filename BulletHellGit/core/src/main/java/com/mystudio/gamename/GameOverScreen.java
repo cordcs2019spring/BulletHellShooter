@@ -60,9 +60,7 @@ public class GameOverScreen // implements ApplicationListener
             if(Gdx.input.isKeyPressed(Input.Keys.X)){
                 
                 stat="START";
-
-                
-            }
+            }    
         }
         
         else {

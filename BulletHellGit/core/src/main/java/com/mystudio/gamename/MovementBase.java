@@ -105,7 +105,7 @@ public class MovementBase {
         //System.out.println("we Just moved Some amout");
 
         //Checks to see of the unit is still onscreen. If they are not on screen, they are removed from the enemies array.
-        CheckBounds();
+        stat=CheckBounds(stat);
 
         //checks to see if the enemy has collided with the player.
         stat = CheckCollision(stat);
@@ -139,7 +139,8 @@ public class MovementBase {
         Checks to see if the unit is out of bounds. If they are, they are removed.
         It does this by seeing if the enemy is off the screen. If they are off the screen, then the unit is searched from the array and removed.
      */
-    private void CheckBounds(){
+    private String CheckBounds(String currStat){
+        String stat = currStat;
         if (point.getX() >= MyMini2DxGame.screenWidth + sprite.getWidth() || point.getY() >= MyMini2DxGame.screenHeight + sprite.getHeight()) {
             MyMini2DxGame.enemies.remove(this);
             System.out.println("Removed an enemy!");
@@ -147,7 +148,12 @@ public class MovementBase {
             //the extra -200 gives us an extra buffer zone at the top of the screen.
             MyMini2DxGame.enemies.remove(this);
             System.out.println("Removed an enemy!");
-    }
+        }
+        else if (stat.equals("GameOver")){
+            MyMini2DxGame.enemies.remove(this);
+            
+        }
+        return stat;
     }
 
     /*
