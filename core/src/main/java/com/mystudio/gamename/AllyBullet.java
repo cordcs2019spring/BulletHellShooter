@@ -38,6 +38,9 @@ public class AllyBullet extends Bullet{
             if (GetHitBox().overlaps(enemy.GetHitBox())){
                 //Slates for remove to avoid a concurrent modification error
                 toRemoveEnemy.add(enemy);
+                
+                //add 50 points to the score per hit
+                MyMini2DxGame.score = MyMini2DxGame.score +50;
 
                 //Slates bullet for removal to avoid a concurrent modification error
                 MyMini2DxGame.player.GetBulletsToDelete().add(this);

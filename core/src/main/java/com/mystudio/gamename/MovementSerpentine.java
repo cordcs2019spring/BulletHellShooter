@@ -1,4 +1,5 @@
 package com.mystudio.gamename;
+import java.util.Random;
 /*
     This class enables serpentine movement. This can be used for moving back an forth on an angle. Moving back and worth while moving down, or moving up and down while going right
     or any other similar combination;
@@ -13,6 +14,10 @@ public class MovementSerpentine extends MovementBase {
     //Same deal but up and down.
     private int maxStepsUpDown;
     private int currentStepsUpDown;
+     //How likely the ship is to shoot at any given time
+    private int shotChance;
+    
+    private String shipType;
 
     /*
         @param String texturepath, the string which leads you to the sprite,
@@ -23,11 +28,13 @@ public class MovementSerpentine extends MovementBase {
         @int maxStepsToSide, the number of frames the enemy moves to the side before revering
         @int maxStepsUpDown, the number of frames the enemy moves up or down before reversing.
      */
-    public MovementSerpentine(String texturePath, float x, float y, int xSpeed, int ySpeed, int maxStepsToSide, int maxStepsUpDown) {
+    public MovementSerpentine(String texturePath, float x, float y, int xSpeed, int ySpeed, int maxStepsToSide, int maxStepsUpDown, int shotChance, String shipType) {
         super(texturePath,x,y,xSpeed,ySpeed);
 
         this.maxStepsToSide = maxStepsToSide;
         this.maxStepsUpDown = maxStepsUpDown;
+        this.shotChance = shotChance;
+        this.shipType = shipType;
     }
 
     public String update(String currStat){
@@ -54,7 +61,24 @@ public class MovementSerpentine extends MovementBase {
         } else if (maxStepsUpDown != -1) {
             currentStepsUpDown++;
         }
+ //BULLET SPAWNER
+        Random roller = new Random();
+        int temp = roller.nextInt(100);
 
+       //uses shotChance variable to determine how often the ship will shoot. Rolled once every update. 
+        if(shipType=="striker"){
+            if (temp<=shotChance){
+                MyMini2DxGame.enemies.add(new EnemyBullet(super.GetPoint().getX()+35,super.GetPoint().getY()+40));
+                }
+        }
+        
+        if(shipType=="slimer"){
+            if (temp<=shotChance){
+                MyMini2DxGame.enemies.add(new EnemyBullet(super.GetPoint().getX()+40,super.GetPoint().getY()+10));
+                MyMini2DxGame.enemies.add(new EnemyBullet(super.GetPoint().getX()+130,super.GetPoint().getY()+10));
+                }
+            
+        }
 
         //Updates game logic, checks collisions
         //This updates the coordinate position of the ship.

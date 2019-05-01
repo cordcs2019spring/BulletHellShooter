@@ -77,7 +77,7 @@ public class PlayerShip extends MovementBase {
         }
         //if you hit space, adds another bullet
         if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
-            bullets.add(new AllyBullet(GetPoint().getX() + (GetSprite().getWidth() / 2),GetPoint().getY()));
+            bullets.add(new AllyBullet(GetPoint().getX() + (GetSprite().getWidth()-45),GetPoint().getY()));
         }
 
         //updates the location of the hitbox
