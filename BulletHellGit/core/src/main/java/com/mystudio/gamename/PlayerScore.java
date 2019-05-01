@@ -5,12 +5,15 @@
  */
 package com.mystudio.gamename;
 
+import org.mini2Dx.core.serialization.annotation.Field;
+
 /**
  * This class represents the score of a particular player
  * @author John
  */
 public class PlayerScore implements Cloneable {
-    private int score;
+    @Field
+    private int score = 0;
     
     public int GetPlayerScore(){
         return score;
@@ -20,7 +23,8 @@ public class PlayerScore implements Cloneable {
         this.score = score;
     }
     
-    private String name;
+    @Field
+    private String name = "";
     
     public String GetPlayerName() {
         return name;
@@ -42,7 +46,28 @@ public class PlayerScore implements Cloneable {
         SetPlayerName(e.GetPlayerName());
     }
     
+    private PlayerScore() {}
+    
     public PlayerScore clone() {
         return new PlayerScore(this);
+    }
+    
+    @Override
+    public boolean equals(Object scr) {
+        
+        PlayerScore temp = new PlayerScore();
+        
+        try {
+            temp = (PlayerScore) scr;
+        } catch (ClassCastException e) {
+            return false;
+        }
+        
+        
+        if(temp.GetPlayerScore() == this.GetPlayerScore() && this.GetPlayerName().equals(temp.GetPlayerName())){
+            return true;
+        } else {
+            return false;
+        }
     }
 }
