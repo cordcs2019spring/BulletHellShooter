@@ -63,7 +63,7 @@ public class MyMini2DxGame extends BasicGame {
 
 	    //texture = new Texture("mini2Dx.png");
        
-        playerShip = new PlayerShip("playership.png", screenWidth+1000,screenHeight+700,6,6);
+        playerShip = new PlayerShip("playership.png", screenWidth+1000,screenHeight+700,7,7);
         player = playerShip;
         
         score = 0;
@@ -87,6 +87,7 @@ public class MyMini2DxGame extends BasicGame {
         gameOverScreen = new GameOverScreen("BetterGameOverScreen.png", 100,100,0,2);
     }
     
+    //the function that runs every tick which checks for screen state and enemy/player movement
     @Override
     public void update(float delta) {
         

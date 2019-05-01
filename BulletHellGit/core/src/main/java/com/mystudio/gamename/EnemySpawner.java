@@ -8,7 +8,7 @@ public class EnemySpawner {
     //initializes the boundaries of the screen and creates a timer variable
     int yboundary;
     int xboundary;
-    public int timer;
+    public int timer=0;
     
     public int GetTimer(){
         return timer;
@@ -36,24 +36,49 @@ public class EnemySpawner {
             float randy = roller.nextInt(300);
             randy = randy*-1;
         
-            if (timer>=100){
+            if (timer>=100&&timer<=1800){
                 if (temp<=2){
                     //starts spawning the grunts: basic straight movement ships
                     MyMini2DxGame.enemies.add(new MovementBase("Ship1.png", randx,randy,0,2));
                 }
             }
-            if (timer>=800){
+            if (timer>=800&&timer<=2900){
                 if (temp<=1){
                     //starts spawning the striker, a fast moving shooting ship
-                    MyMini2DxGame.enemies.add(new MovementSerpentine("striker.png", randx, randy, 2, 3, 40*temp2, -1, 1));
+                    MyMini2DxGame.enemies.add(new MovementSerpentine("striker.png", randx, randy, 2, 3, 50*temp2, -1, 1,"striker"));
                 }
             }
-            if (timer>=1500){
+            if (timer>=1500&&timer<=3600){
                 if (temp==0){
                     //starts spawning the slimer: a large slow moving shooting ship
-                    MyMini2DxGame.enemies.add(new MovementSerpentine("slimer.png", randx, randy, 1, 1, 400, -1, 3));
+                    MyMini2DxGame.enemies.add(new MovementSerpentine("slimer.png", randx, randy, 1, 1, 250, -1, 2,"slimer"));
                 }
             }
+            if (timer>=2200){
+                if (temp<=5){
+                    //starts spawning the grunts: basic straight movement ships
+                    MyMini2DxGame.enemies.add(new MovementBase("Ship1.png", randx,randy,0,2));
+                }
+            }
+            if (timer>=2900){
+                if (temp<=3){
+                    //starts spawning the striker, a fast moving shooting ship
+                    MyMini2DxGame.enemies.add(new MovementSerpentine("striker.png", randx, randy, 2, 3, 50*temp2, -1, 1,"striker"));
+                }
+            }
+            if (timer>=3600){
+                if (temp<=2){
+                    //starts spawning the slimer: a large slow moving shooting ship
+                    MyMini2DxGame.enemies.add(new MovementSerpentine("slimer.png", randx, randy, 1, 1, 250, -1, 2,"slimer"));
+                }
+            }
+            if (timer>=4500){
+                if (temp<=1){
+                    //starts spawning the slimer: a large slow moving shooting ship
+                    MyMini2DxGame.enemies.add(new MovementBase("charger.png", randx, randy, 0, 5));
+                }
+            }
+            
             
             
         
