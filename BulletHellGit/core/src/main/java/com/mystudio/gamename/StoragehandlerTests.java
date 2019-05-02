@@ -78,11 +78,24 @@ public class StoragehandlerTests {
         return didStore && didLoad;
     }
     
+    public static boolean TestSearchByName_General(){
+        StorageHandler.AppendScore("jim", 30);
+        StorageHandler.AppendScore("dave", 10);
+        StorageHandler.AppendScore("jim", 15);
+        StorageHandler.AppendScore("dilbert", 10);
+        StorageHandler.AppendScore("bob", 10);
+        
+        PlayerScore[] temp = StorageHandler.GiveScoresSortedByName("jim");
+        return temp[0].GetPlayerName().equals("jim");
+    }
+    
+    
     public static void tests(){
         System.out.println("AppendScore_General() works?: " + AppendScore_General());
         System.out.println("GiveScoresSortedByHighest_SortsCorrectly() works?: " + GiveScoresSortedByHighest_SortsCorrectly());
         System.out.println("GiveScoresSortedByLowest_SortsCorrectly() works? : " + GiveScoresSortedByLowest_SortsCorrectly());
         System.out.println("TestLoadAndSave_DidNotCrash() works? : " + TestLoadAndSave_DidNotCrash());
+        System.out.println("TestSearchByName_General() works?: " + TestSearchByName_General());
     }
     
     
