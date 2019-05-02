@@ -62,10 +62,11 @@ public class GameOverScreen // implements ApplicationListener
         if (stat.equals("GameOver")) {
             stat = "GameOver";
             if(!hasStored){
+                //this loads current scores, then appends the latest score. We set hasStored to true, so that we don't do this operation again
                 StorageHandler.Load();
                 StorageHandler.AppendScore("", MyMini2DxGame.score);
-                System.out.println(StorageHandler.GetPlayerData().RetrieveScores()[0].GetPlayerScore());
-                System.out.println(StorageHandler.GiveScoresSortedByHighest()[0].GetPlayerScore());
+                //System.out.println(StorageHandler.GetPlayerData().RetrieveScores()[0].GetPlayerScore());
+                //System.out.println(StorageHandler.GiveScoresSortedByHighest()[0].GetPlayerScore());
                 hasStored = true;
             }
             if(Gdx.input.isKeyPressed(Input.Keys.X)){
@@ -106,11 +107,15 @@ public class GameOverScreen // implements ApplicationListener
         g.drawSprite(sprite,800,400);
         g.drawString("Game Over! Your Score is: " + MyMini2DxGame.score,200,200);
         if(!hasSortedScores) {
+            //Gives is a sorted array of ints for the score. Boolean ensures we don't perform this 
+            //action every time the function is called.
             PlayerScore[] temp = StorageHandler.GiveScoresSortedByHighest();
             scores = new String[temp.length];
             for(int i = 0; i < temp.length;i++){
+                //by all rights, this should be in a trie catch block. But, this would already have thrown an
+                //exeption if there was an issue.
                 scores[i] = Integer.toString(temp[i].GetPlayerScore());
-                System.out.println("Scores: " + scores[i]);
+                //System.out.println("Scores: " + scores[i]);
                 //System.out.println("Player Score: " + temp[i].GetPlayerScore());
                 hasSortedScores = true;
             }
@@ -123,7 +128,7 @@ public class GameOverScreen // implements ApplicationListener
             System.out.println("You've gone too far!");
         }*/
         
-        
+        //Yes, it's just some ints for positioning. While not ideal, it's just going to have to do for now.
         g.drawString("Here are the previous high scores: ", 200, 225);
         for(int i = 0; i < scores.length;i++){
             g.drawString(scores[i], 450, 225 + 20*i);

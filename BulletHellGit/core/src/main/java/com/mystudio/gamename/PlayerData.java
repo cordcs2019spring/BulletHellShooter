@@ -11,12 +11,13 @@ import org.mini2Dx.core.playerdata.PlayerDataException;
 import org.mini2Dx.core.serialization.annotation.Field;
 
 /**
- *
+ * This is the data object serialized and stored by the game.
  * @author John
  */
 public class PlayerData {
     
     //Stack used for data storage. @Field indicates to the library that this can be stored
+    //Being a stack seems to be important for data sotrage.
     @Field
     private Stack<PlayerScore> playerScores = new Stack<PlayerScore>();
     

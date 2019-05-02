@@ -10,6 +10,8 @@ import java.util.ArrayList;
 
 public class PlayerShip extends MovementBase {
 
+    //PROPERTIES
+    
     private ArrayList<AllyBullet> bullets = new ArrayList<AllyBullet>();
     private ArrayList<AllyBullet> bulletsToDelete = new ArrayList<AllyBullet>();
 
@@ -21,10 +23,6 @@ public class PlayerShip extends MovementBase {
         bullets = arr;
     }
 
-    public PlayerShip(String texturePath, int x, int y, int xSpeed, int ySpeed) {
-        super(texturePath,  x,  y,  xSpeed,  ySpeed);
-    }
-
     public ArrayList<AllyBullet> GetBulletsToDelete() {
         return bulletsToDelete;
     }
@@ -33,8 +31,19 @@ public class PlayerShip extends MovementBase {
         bulletsToDelete = arr;
     }
 
+    //CONSTRUCTOS
+    
     /*
-        Similar to super class, but only moves if a key is pressed. Also, doesn't directly check collisions. Bullets check collisions, and enemies check against the player
+        This is our constructor. It is based on movement base, and it serves admirably.
+    */
+    public PlayerShip(String texturePath, int x, int y, int xSpeed, int ySpeed) {
+        super(texturePath,  x,  y,  xSpeed,  ySpeed);
+    }
+    
+    //METHODS
+    
+    /*
+        Similar to super class, but only moves if a key is pressed. Also, doesn't directly check collisions. Bullets check collisions, and enemies check against the player.
      */
     public String update(String currStat) {
         String stat = currStat;
@@ -72,9 +81,10 @@ public class PlayerShip extends MovementBase {
             if (GetPoint().getY() + GetSprite().getHeight() + GetYSpeed() <= MyMini2DxGame.screenHeight)
                 GetPoint().setY((GetPoint().getY() + GetYSpeed()));
 
-            System.out.println(MyMini2DxGame.screenHeight);
-            System.out.println(GetPoint().getY());
+            //System.out.println(MyMini2DxGame.screenHeight);
+            //System.out.println(GetPoint().getY());
         }
+        
         //if you hit space, adds another bullet
         if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
             bullets.add(new AllyBullet(GetPoint().getX() + (GetSprite().getWidth()-45),GetPoint().getY()));

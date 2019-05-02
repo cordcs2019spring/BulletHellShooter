@@ -22,6 +22,8 @@ public class StorageHandler {
     
     //this is the object that actually gets written to memory
     private static PlayerData playerData = new PlayerData();
+    
+    //This is the file where the save data is stored. It varies from machine to machine, but the game can always find it
     private static final FileHandle FILE = Gdx.files.local("savedata.txt");
     
     public static void SetPlayerData(PlayerData pd){
@@ -36,19 +38,27 @@ public class StorageHandler {
         If this failes, then false is returned
     */
     public static boolean Load(){
+        //this is a rather fragile process, so we need to nest it in two try blocks.
         try {
             try{
+                //reads the whole damn string
                 String temp = FILE.readString();
+                
+                //attempts to split at each new line
                 String[] rows = temp.split("\n");
+                
                 for(String str: rows){
+                    //attempts to split again at each comma
                     String[] columns = str.split(",");
                     int score = 0;
+                    
+                    //tries to convert the second comlumn, which is always the score, to an int.
                     try {
                         score = Integer.parseInt(columns[1]);
                     } catch (NumberFormatException e) {
                         score = -1;
                     }
-                
+                    //this adds the score from memory into the current data object.
                     AppendScore(columns[0],score);
                 } 
             
@@ -68,7 +78,7 @@ public class StorageHandler {
         
     */
     public static boolean Store() {
-        /*
+        /* Just ignore this part. It's an unhappy memory.
         try {
             Mdx.playerData.writeJson(playerData, "playerdata.json");
             return true;
@@ -76,13 +86,14 @@ public class StorageHandler {
             System.out.println("Could Not Save Data");
             return false;
         }*/
-        
+        //So, we have our scores
         PlayerScore[] temp = playerData.RetrieveScores();
         
-        //resets the file contents
+        //We've reset the file contents to make sure we don't duplicate anything
+        //This is needlessly inefficient, but I'm out of braincells. 
         FILE.writeString("", false);
         
-        
+        //We cycle through the array attempting to write to the file. 
         for(PlayerScore score: temp) {
             FILE.writeString(score.GetPlayerName() + "," + score.GetPlayerScore()+"\n", true);
         }
@@ -90,6 +101,7 @@ public class StorageHandler {
       //System.out.println(FILE.readString());
         
         //clears out player data.
+        //Store should only be called when you are absolutely done with player scores
         playerData = new PlayerData();
         
         return true;
@@ -114,12 +126,13 @@ public class StorageHandler {
         Because, that is just simple and easy enough for me to do
         And also, there probably isn't ever going to be that many scores
     
-        Returns a sorted array of scores
+        Returns a sorted array of scores. Lowest to highest. What more do you
+        need to know?
     */
     public static PlayerScore[] GiveScoresSortedByLowest() {
         PlayerScore[] temp = StorageHandler.GiveScoresUnsorted();
         
-        //Bubble sorting, for fun and profit
+        //Bubble sorting, for fun and profit. O(n^2) ftw.
         for(int i = 0; i < temp.length - 1;i++) {
             for(int x = 0; x < temp.length - i - 1;x++){
                 if(temp[x].GetPlayerScore() > temp[x + 1].GetPlayerScore()) {
@@ -134,7 +147,7 @@ public class StorageHandler {
     }
     
     /*
-        Same deal, sorted by lowest
+        Same deal, sorted by lowest...
     */
     public static PlayerScore[] GiveScoresSortedByHighest(){
         PlayerScore[] temp = StorageHandler.GiveScoresSortedByLowest();
@@ -156,6 +169,7 @@ public class StorageHandler {
     public static PlayerScore[] GiveScoresSortedByName(String name) {
         PlayerScore[] temp = playerData.RetrieveScores();
         
+        //Two arraylists get added two as we iterate over the entire temp array.
         ArrayList<PlayerScore> hasName = new ArrayList<PlayerScore>();
         ArrayList<PlayerScore> noName = new ArrayList<PlayerScore>();
         
@@ -170,7 +184,7 @@ public class StorageHandler {
         
         hasName.addAll(noName);
         
-        //converts to an proper array
+        //By the power of the Java standard library, I declare you a proper Array!
         temp = hasName.toArray(new PlayerScore[hasName.size()]);
         
         return temp;

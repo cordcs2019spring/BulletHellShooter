@@ -145,7 +145,7 @@ public class MovementBase {
             MyMini2DxGame.enemies.remove(this);
             System.out.println("Removed an enemy!");
         } else if (point.getX() <= 0 - sprite.getWidth() || point.getY() <= -200 - sprite.getHeight() ) {
-            //the extra -200 gives us an extra buffer zone at the top of the screen.
+            //the extra -200 gives us an extra buffer zone at the top of the screen. This lets us spawn enemies up top and move them down.
             MyMini2DxGame.enemies.remove(this);
             System.out.println("Removed an enemy!");
         }
